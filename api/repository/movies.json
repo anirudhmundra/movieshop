@@ -1,0 +1,22 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "name": "The Secret",
+      "price": 100,
+      "director": "Tom"
+    },
+    {
+      "id": 2,
+      "name": "The Shining",
+      "price": 250,
+      "director": "Hanks"
+    },
+    {
+      "id": 3,
+      "name": "The Godfather",
+      "price": 100.50,
+      "director": "David"
+    }
+  ]
+}
