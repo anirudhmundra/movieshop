@@ -14,7 +14,7 @@ import (
 // @title Movie Shop APIs
 // @version v1.0
 // @description List of Movie APIs
-// @BasePath /api/movies
+// @BasePath /api
 
 func SetupRouter() *gin.Engine{
 
@@ -23,7 +23,7 @@ func SetupRouter() *gin.Engine{
 	docs.SwaggerInfo.Host = "localhost:8080"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
-	movieapi := router.Group("api/movies")
+	movieapi := router.Group("/api")
 	{
 		// @tag.name info
 		// @tag.description Gives information of the API
@@ -36,14 +36,15 @@ func SetupRouter() *gin.Engine{
 
 		// @tag.name movie
 		// @tag.description Gives movies and information
-		movieGroup := movieapi.Group("/")
+		movieGroup := movieapi.Group("/movies")
 		{
 			fileHelper := util.NewFileHelper()
 			bookService := service.NewMovieService(fileHelper)
 			bookController := controller.NewMovieController(bookService)
 			movieGroup.GET("", bookController.GetAllMovies)
+			movieGroup.GET(":id", bookController.GetMovieById)
 		}
-		movieGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+		movieapi.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 	return router
 }

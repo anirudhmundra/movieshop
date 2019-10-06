@@ -1,4 +1,4 @@
-basePath: /api/movies
+basePath: /api
 definitions:
   model.Info:
     properties:
@@ -38,6 +38,22 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/model.Movies'
+      tags:
+      - movie
+  /{id}:
+    get:
+      description: Get Movie By Id
+      parameters:
+      - description: Movie ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Movie'
       tags:
       - movie
   /info:
