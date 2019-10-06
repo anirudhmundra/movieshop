@@ -1,0 +1,58 @@
+basePath: /api/movies
+definitions:
+  model.Info:
+    properties:
+      version:
+        type: string
+    type: object
+  model.Movie:
+    properties:
+      director:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  model.Movies:
+    properties:
+      movies:
+        items:
+          $ref: '#/definitions/model.Movie'
+        type: array
+    type: object
+info:
+  contact: {}
+  description: List of Movie APIs
+  license: {}
+  title: Movie Shop APIs
+  version: v1.0
+paths:
+  /:
+    get:
+      description: Get All Movies
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Movies'
+      tags:
+      - movie
+  /info:
+    get:
+      description: Get Project Info
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Info'
+      tags:
+      - info
+swagger: "2.0"
+tags:
+- description: Gives information of the API
+  name: info
+- description: Gives movies and information
+  name: movie

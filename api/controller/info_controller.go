@@ -14,6 +14,10 @@ func NewInfoController(info model.Info) infoController{
 	return infoController{info}
 }
 
+// @Tags info
+// @Description Get Project Info
+// @Success 200 {object} model.Info
+// @Router /info [get]
 func (controller infoController) GetInfo(context *gin.Context){
 	jsonInfo,err := json.Marshal(controller.Info)
 	if err != nil {

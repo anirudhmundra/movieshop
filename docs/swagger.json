@@ -1,0 +1,93 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "List of Movie APIs",
+        "title": "Movie Shop APIs",
+        "contact": {},
+        "license": {},
+        "version": "v1.0"
+    },
+    "basePath": "/api/movies",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Get All Movies",
+                "tags": [
+                    "movie"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Movies"
+                        }
+                    }
+                }
+            }
+        },
+        "/info": {
+            "get": {
+                "description": "Get Project Info",
+                "tags": [
+                    "info"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Info"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Info": {
+            "type": "object",
+            "properties": {
+                "version": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.Movie": {
+            "type": "object",
+            "properties": {
+                "director": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            }
+        },
+        "model.Movies": {
+            "type": "object",
+            "properties": {
+                "movies": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Movie"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "description": "Gives information of the API",
+            "name": "info"
+        },
+        {
+            "description": "Gives movies and information",
+            "name": "movie"
+        }
+    ]
+}

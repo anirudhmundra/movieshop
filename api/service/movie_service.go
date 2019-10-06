@@ -1,9 +1,9 @@
 package service
 
 import (
+	"bookshop/api/util"
 	"bookshop/model"
 	"encoding/json"
-	"io/ioutil"
 )
 
 type MovieService interface {
@@ -11,19 +11,21 @@ type MovieService interface {
 }
 
 type movieService struct{
-	fileHelper
+	fileHelper util.FileHelper
 }
 
-func NewMovieService() MovieService {
-	return movieService{}
+func NewMovieService(helper util.FileHelper) MovieService {
+	return movieService{helper}
 }
 
 func (service movieService) GetAllMovies() (model.Movies, error) {
 	var movies model.Movies
-	bytes, err := ioutil.ReadFile("api/repository/movies.json")
-	println(bytes)
+	bytes, err := service.fileHelper.ReadJsonFile("api/repository/movies.json")
+	if err != nil {
+		println(err.Error())
+		return model.Movies{}, err
+	}
 	json.Unmarshal(bytes, &movies)
-	println(movies.Movies[0].Director)
 	return movies, err
 }
 

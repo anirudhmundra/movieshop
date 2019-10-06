@@ -7,7 +7,7 @@ import (
 )
 
 type MovieController interface {
-	GetAllMovies(c *gin.Context)
+	GetAllMovies(context *gin.Context)
 }
 
 type movieController struct {
@@ -17,11 +17,16 @@ type movieController struct {
 func NewMovieController(service service.MovieService) MovieController {
 	return movieController{service}
 }
+
+
+// @Tags movie
+// @Description Get All Movies
+// @Success 200 {object} model.Movies
+// @Router / [get]
 func (controller movieController) GetAllMovies(context *gin.Context){
-	if movies, err := service.NewMovieService().GetAllMovies(); err != nil {
+	if movies, err := controller.service.GetAllMovies(); err != nil {
 		context.AbortWithStatus(http.StatusInternalServerError)
 	} else {
-		println("Inside movies")
 		context.JSON(http.StatusOK, movies)
 	}
 
