@@ -1,16 +1,18 @@
 package controller
 
 import (
-	"bookshop/model"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
+	"movieshop/model"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
-type infoController struct{
+
+type infoController struct {
 	Info model.Info
 }
 
-func NewInfoController(info model.Info) infoController{
+func NewInfoController(info model.Info) infoController {
 	return infoController{info}
 }
 
@@ -18,8 +20,8 @@ func NewInfoController(info model.Info) infoController{
 // @Description Get Project Info
 // @Success 200 {object} model.Info
 // @Router /info [get]
-func (controller infoController) GetInfo(context *gin.Context){
-	jsonInfo,err := json.Marshal(controller.Info)
+func (controller infoController) GetInfo(context *gin.Context) {
+	jsonInfo, err := json.Marshal(controller.Info)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, model.Info{})
 	}

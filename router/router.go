@@ -1,14 +1,15 @@
 package router
 
 import (
-	"bookshop/api/controller"
-	"bookshop/api/service"
-	"bookshop/api/util"
-	"bookshop/docs"
-	"bookshop/model"
+	"movieshop/api/controller"
+	"movieshop/api/service"
+	"movieshop/api/util"
+	"movieshop/docs"
+	"movieshop/model"
+
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/files"
-	"github.com/swaggo/gin-swagger"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 // @title Movie Shop APIs
@@ -16,7 +17,7 @@ import (
 // @description List of Movie APIs
 // @BasePath /api
 
-func SetupRouter() *gin.Engine{
+func SetupRouter() *gin.Engine {
 
 	router := gin.Default()
 
@@ -31,7 +32,7 @@ func SetupRouter() *gin.Engine{
 		{
 			version := "v1.0"
 			info := model.Info{version}
-			infoGroup.GET("",controller.NewInfoController(info).GetInfo)
+			infoGroup.GET("", controller.NewInfoController(info).GetInfo)
 		}
 
 		// @tag.name movie

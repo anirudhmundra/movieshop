@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bookshop/router"
+	"movieshop/router"
 )
 
-func main()  {
+func main() {
 	r := router.SetupRouter()
 	r.Run()
 }
